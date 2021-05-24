@@ -10,19 +10,19 @@ using Microsoft.Bot.Schema;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
-    public class EchoBot : ActivityHandler
+    public class ChatbotLUIS : ActivityHandler
     {
 
-        protected readonly ILuisRecognizerService luisRecognizerService;
+        protected readonly ILuisRecognizerService _luisRecognizerService;
 
-        public EchoBot(ILuisRecognizerService _luisRecognizerService)
+        public ChatbotLUIS(ILuisRecognizerService luisRecognizerService)
         {
             _luisRecognizerService = luisRecognizerService;
         }
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            var welcomeText = "Hola, Bienve!";
+            var welcomeText = "Hola, B!";
             foreach (var member in membersAdded)
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
@@ -38,14 +38,14 @@ namespace Microsoft.BotBuilderSamples.Bots
         }
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            var recognizerResult = await luisRecognizerService._recognizer.RecognizeAsync(turnContext, cancellationToken);
-            await ManageIntentions(turnContext, recognizerResult, cancellationToken);
+            var recognizeResult = await _luisRecognizerService._recognizer.RecognizeAsync(turnContext, cancellationToken);
+            await ManageIntentions(turnContext, recognizeResult, cancellationToken);
         }
 
         private async Task ManageIntentions(ITurnContext<IMessageActivity> turnContext, RecognizerResult recognizerResult, CancellationToken cancellationToken)
         {
             var topIntent = recognizerResult.GetTopScoringIntent();
-            switch(topIntent.intent)
+            switch (topIntent.intent)
             {
                 case "Saludar":
                     await IntentSaludar(turnContext, recognizerResult, cancellationToken);

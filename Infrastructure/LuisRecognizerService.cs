@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EchoBot.Infrastructure
 {
-    public class LuisRecognizerService: ILuisRecognizerService
+    public class LuisRecognizerService : ILuisRecognizerService
     {
         public LuisRecognizer _recognizer { get; private set; }
 
