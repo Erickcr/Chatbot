@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
@@ -22,7 +22,7 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            var welcomeText = "Hola, B!";
+            var welcomeText = "Hola, Bienvenido!";
             foreach (var member in membersAdded)
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
@@ -64,22 +64,29 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         private async Task IntentSaludar(ITurnContext<IMessageActivity> turnContext, RecognizerResult recognizerResult, CancellationToken cancellationToken)
         {
-            await turnContext.SendActivityAsync($"Hola, �como te puedo ayudar?", cancellationToken: cancellationToken);
+            await turnContext.SendActivityAsync($"Hola, ¿como te puedo ayudar?", cancellationToken: cancellationToken);
         }
 
         private async Task IntentAgradecer(ITurnContext<IMessageActivity> turnContext, RecognizerResult recognizerResult, CancellationToken cancellationToken)
         {
-            await turnContext.SendActivityAsync($"Me gusta ayuudar", cancellationToken: cancellationToken);
+            await turnContext.SendActivityAsync($"Estoy para servirte, me gusta ayudar.", cancellationToken: cancellationToken);
         }
 
         private async Task IntentDatosInscripcion(ITurnContext<IMessageActivity> turnContext, RecognizerResult recognizerResult, CancellationToken cancellationToken)
         {
-            await turnContext.SendActivityAsync($"Certificado y dinero, es lo que ocupas", cancellationToken: cancellationToken);
+            await turnContext.SendActivityAsync($"-Copia cotejada del título de licenciatura, cédula profesional, acta de examen profesional o documento oficial equivalente en Derecho o disciplinas afines al Programa a cursar." + "\r\n" +
+                $"-Copia de certificado de estudios con promedio mínimo de ocho." + "\r\n" +
+                $"Copia del acta de nacimiento." + "\r\n" +
+                $"Dos copias del CURP(actualizado)." + "\r\n" +
+                $"Curriculum Vitae con soporte documental en copia." + "\r\n" +
+                $"Carta de exposición de motivos." + "\r\n" +
+                $"Dos fotografías tamaño infantil de frente." + "\r\n" +
+                $"Dos cartas de recomendación académica.", cancellationToken: cancellationToken);
         }
 
         private async Task IntentNone(ITurnContext<IMessageActivity> turnContext, RecognizerResult recognizerResult, CancellationToken cancellationToken)
         {
-            await turnContext.SendActivityAsync($"No entiendo", cancellationToken: cancellationToken);
+            await turnContext.SendActivityAsync($"No entiendo, se más claro.", cancellationToken: cancellationToken);
         }
     }
 }
