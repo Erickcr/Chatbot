@@ -64,7 +64,7 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         private async Task IntentSaludar(ITurnContext<IMessageActivity> turnContext, RecognizerResult recognizerResult, CancellationToken cancellationToken)
         {
-            await turnContext.SendActivityAsync($"Hola, ¿como te puedo ayudar?", cancellationToken: cancellationToken);
+            await turnContext.SendActivityAsync($"¿Como te puedo ayudar?", cancellationToken: cancellationToken);
         }
 
         private async Task IntentAgradecer(ITurnContext<IMessageActivity> turnContext, RecognizerResult recognizerResult, CancellationToken cancellationToken)
